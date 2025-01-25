@@ -1,0 +1,88 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql" // Cambia esto si usas otro SGBD como PostgreSQL
+  url      = env("DATABASE_URL")
+}
+
+model Empresa {
+  id         Int       @id @default(autoincrement())
+  nombre     String
+  contrasena String
+  email      String?   @unique
+  direccion  String?
+  telefono   String?
+  proyectos  Proyecto[]
+  equipos    Equipo[]
+  recursos   Recurso[]
+}
+
+
+model Proyecto {
+  id         Int       @id @default(autoincrement())
+  nombre     String
+  descripcion String?
+  fechaInicio DateTime
+  estado     String?
+  progreso   String?
+  empresaId  Int
+  finalizado Boolean
+  empresa    Empresa   @relation(fields: [empresaId], references: [id])
+  equipos    Equipo[]
+  recursos   Recurso[]
+}
+
+model Equipo {
+  id         Int       @id @default(autoincrement())
+  nombre     String    @unique
+  funcion    String?
+  proyectoId Int?
+  empresaId  Int
+  proyecto   Proyecto? @relation(fields: [proyectoId], references: [id])
+  empresa    Empresa   @relation(fields: [empresaId], references: [id])
+  miembros   Miembro[]
+}
+
+model Miembro {
+  id       Int    @id @default(autoincrement())
+  nombre   String
+  especialidad String?
+  cargaTrabajo Float?
+  equipoId Int
+  correo   String @unique
+  contrasena String
+  equipo   Equipo @relation(fields: [equipoId], references: [id])
+}
+
+model Recurso {
+  id            Int       @id @default(autoincrement())
+  nombre        String
+  tipo          String?
+  disponibilidad String?
+  detalles      String?
+  fechaInicio   DateTime
+  fechaFin      DateTime?
+  proyectoId    Int?
+  empresaId     Int
+  proyecto      Proyecto? @relation(fields: [proyectoId], references: [id])
+  empresa       Empresa  @relation(fields: [empresaId], references: [id])
+  usos          UsoRecurso[]
+}
+
+model UsoRecurso {
+  id           Int       @id @default(autoincrement())
+  recursoId    Int
+  tipoCambio   String?
+  fechaRegistro DateTime @default(now())
+  fechaInicio  DateTime
+  fechaFin     DateTime?
+  recurso      Recurso   @relation(fields: [recursoId], references: [id])
+}
