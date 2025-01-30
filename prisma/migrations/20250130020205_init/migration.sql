@@ -1,4 +1,19 @@
 -- CreateTable
+CREATE TABLE `RegistroPendiente` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `nombre` VARCHAR(191) NOT NULL,
+    `email` VARCHAR(191) NOT NULL,
+    `direccion` VARCHAR(191) NULL,
+    `telefono` VARCHAR(191) NULL,
+    `contrasena` VARCHAR(191) NOT NULL,
+    `verificationToken` VARCHAR(191) NOT NULL,
+    `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+    UNIQUE INDEX `RegistroPendiente_email_key`(`email`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `Empresa` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `nombre` VARCHAR(191) NOT NULL,
@@ -6,6 +21,8 @@ CREATE TABLE `Empresa` (
     `email` VARCHAR(191) NULL,
     `direccion` VARCHAR(191) NULL,
     `telefono` VARCHAR(191) NULL,
+    `verificationToken` VARCHAR(191) NULL,
+    `isVerified` BOOLEAN NOT NULL DEFAULT false,
 
     UNIQUE INDEX `Empresa_email_key`(`email`),
     PRIMARY KEY (`id`)

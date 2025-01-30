@@ -12,7 +12,16 @@ datasource db {
   provider = "mysql" // Cambia esto si usas otro SGBD como PostgreSQL
   url      = env("DATABASE_URL")
 }
-
+model RegistroPendiente {
+  id            Int      @id @default(autoincrement())
+  nombre        String
+  email         String   @unique
+  direccion     String?
+  telefono      String?
+  contrasena    String
+  verificationToken String
+  createdAt     DateTime @default(now())
+}
 model Empresa {
   id         Int       @id @default(autoincrement())
   nombre     String
@@ -20,6 +29,8 @@ model Empresa {
   email      String?   @unique
   direccion  String?
   telefono   String?
+  verificationToken String?
+  isVerified Boolean @default(false)
   proyectos  Proyecto[]
   equipos    Equipo[]
   recursos   Recurso[]
