@@ -31,6 +31,7 @@ model Empresa {
   telefono   String?
   verificationToken String?
   isVerified Boolean @default(false)
+  Enable2FA  Boolean @default(false)
   proyectos  Proyecto[]
   equipos    Equipo[]
   recursos   Recurso[]

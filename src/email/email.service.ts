@@ -14,6 +14,18 @@ export class EmailService {
       },
     });
   }
+  // Modificación del servicio de correo
+  async sendVerificationLink(email: string, link: string): Promise<void> {
+    const mailOptions = {
+      from: 'tu_correo@gmail.com',
+      to: email,
+      subject: 'Enlace de verificación',
+      html: `<p>Haz clic en el siguiente enlace para completar tu autenticación:</p>
+           <a href="${link}">${link}</a>`,
+    };
+
+    await this.transporter.sendMail(mailOptions);
+  }
 
   async sendVerificationEmail(email: string, token: string): Promise<void> {
     const mailOptions = {

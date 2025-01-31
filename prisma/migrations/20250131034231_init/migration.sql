@@ -23,6 +23,7 @@ CREATE TABLE `Empresa` (
     `telefono` VARCHAR(191) NULL,
     `verificationToken` VARCHAR(191) NULL,
     `isVerified` BOOLEAN NOT NULL DEFAULT false,
+    `Enable2FA` BOOLEAN NOT NULL DEFAULT false,
 
     UNIQUE INDEX `Empresa_email_key`(`email`),
     PRIMARY KEY (`id`)
