@@ -198,6 +198,7 @@ export class AuthService {
       id: user.id,
       nombre: user.nombre,
       email: user.email,
+      Enable2FA: user.Enable2FA,
     };
   }
   async getUser(id: number) {
