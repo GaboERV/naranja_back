@@ -11,7 +11,7 @@ async function bootstrap() {
   });
   // Configuración de Swagger
   const config = new DocumentBuilder()
-    .setTitle('Itzchel-back')
+    .setTitle('Naranja')
     .setDescription('Documentación de la API para de Itzchel')
     .setVersion('1.0')
     .addBearerAuth() // Agregar autenticación con JWT
