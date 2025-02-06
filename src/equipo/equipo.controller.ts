@@ -20,16 +20,6 @@ export class EquipoController {
     return this.equipoService.create(createEquipoDto);
   }
 
-  @Get()
-  findAll() {
-    return this.equipoService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.equipoService.findOne(+id);
-  }
-
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateEquipoDto: UpdateEquipoDto) {
     return this.equipoService.update(+id, updateEquipoDto);
